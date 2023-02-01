@@ -144,7 +144,7 @@ resource "datadog_monitor" "eks_pods_status_pending" {
 #####  Nodes CPU Utilization ######
 
 resource "datadog_monitor" "eks_nodes_cpu" {
-  name               = "${var.aws_account_name} EKS Node CPU usage "
+  name               = "${var.aws_account_name} EKS Node CPU usage"
   type               = "metric alert"
   message            = "CPU usage high on {{host}} : {{value}}  Notify: ${var.notification_channel}"
   escalation_message = "Escalation message ${var.notification_channel}"
@@ -240,7 +240,7 @@ resource "datadog_monitor" "eks_nodes_notready" {
   message            = "Number of nodes not ready : {{value}} :- {{host}} Notify: ${var.notification_channel}"
   escalation_message = "Escalation message ${var.notification_channel}"
 
-  query = "avg(last_5m):sum:kubernetes_state.nodes.by_condition{condition NOT IN (ready) AND status NOT IN (true) AND cluster_name:${var.aws_eks_cluster_name}} by {condition,aws_autoscaling_groupname} > 8"
+  query = "avg(last_5m):sum:kubernetes_state.nodes.by_condition{condition NOT IN (ready) AND status NOT IN (true) AND cluster_name:${var.aws_eks_cluster_name} } by {condition,aws_autoscaling_groupname} > 1"
 
   monitor_thresholds {
     warning           = 7
