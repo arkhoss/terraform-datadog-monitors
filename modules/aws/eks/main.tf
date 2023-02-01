@@ -240,13 +240,13 @@ resource "datadog_monitor" "eks_nodes_notready" {
   message            = "Number of nodes not ready : {{value}} :- {{host}} Notify: ${var.notification_channel}"
   escalation_message = "Escalation message ${var.notification_channel}"
 
-  query = "avg(last_5m):sum:kubernetes_state.nodes.by_condition{condition NOT IN (ready) AND status NOT IN (true) AND cluster_name:${var.aws_eks_cluster_name} } by {condition,aws_autoscaling_groupname} > 1"
+  query = "avg(last_5m):sum:kubernetes_state.nodes.by_condition{condition NOT IN (ready) AND status NOT IN (true) AND cluster_name:${var.aws_eks_cluster_name} } by {condition,aws_autoscaling_groupname} > 2"
 
   monitor_thresholds {
-    warning           = 7
-    warning_recovery  = 6
-    critical          = 8
-    critical_recovery = 7
+    warning           = 1
+    warning_recovery  = 0
+    critical          = 2
+    critical_recovery = 1
   }
 
   new_group_delay      = 300
