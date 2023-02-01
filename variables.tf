@@ -71,7 +71,7 @@ variable "custom_monitors_details" {
   #    notify_audit         = false
   #    timeout_h            = 60
   #    include_tags         = true
-  #    tags                 = ["audacy2:prod", "EKS"]
+  #    tags                 = ["cluster_name:${cluster_name}", "environment:${environment}"]
   #  }]
   description = "Custom monitors details"
 }

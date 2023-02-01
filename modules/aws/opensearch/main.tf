@@ -29,7 +29,7 @@ resource "datadog_monitor" "opensearch_index_health" {
 }
 
 ### Cluster overall Health ###
-resource "datadog_monitor" "audacy2-prod-ElasticSearch-cluster-health" {
+resource "datadog_monitor" "opensearch-cluster-health" {
   name               = "${var.aws_account_name} ElasticSearch cluster health "
   type               = "metric alert"
   message            = "ElasticSearch cluster health (0=red,1=yellow,2=green) : {{value}}  Notify: ${var.notification_channel}"
